@@ -1,0 +1,6 @@
+Flask
+pymongo[srv]
+flask-cors
+pandas
+scipy
+python-dotenv

@@ -1,0 +1,619 @@
+/* --- :ROOT (ЗМІННІ КОЛЬОРІВ - ОНОВЛЕНО) --- */
+:root {
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+  /* --- Змінено на зелену гаму --- */
+  --color-primary: #28a745; /* Зелений */
+  --color-primary-dark: #218838;
+  --color-primary-light: #eaf6ec; /* Світло-зелений для фокусів */
+
+  /* --- Більш сіра гама --- */
+  --color-bg: #f8f9fa; /* Дуже світло-сірий фон */
+  --color-sidebar-bg: #343a40; /* Темно-сірий для бічної панелі */
+  --color-content-bg: #ffffff; /* Білий залишається для контенту */
+
+  --color-text: #212529; /* Майже чорний текст */
+  --color-text-light: #6c757d; /* Сірий для вторинного тексту */
+  --color-text-inverted: #ffffff;
+
+  --color-border: #dee2e6; /* Світліший сірий для рамок */
+  --color-shadow: rgba(0, 0, 0, 0.05);
+
+  /* --- Акцентні кольори --- */
+  --color-success: #28a745; /* Зелений (як і primary) */
+  --color-danger: #dc3545; /* Червоний */
+  --color-warning: #ffc107; /* Жовтий */
+  --color-info: #17a2b8; /* Синьо-зелений */
+}
+
+/* --- ЗАГАЛЬНІ СТИЛІ --- */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  font-weight: 600;
+  color: #343a40; /* Темніший колір заголовків */
+}
+
+/* --- РОЗМІТКА ДОДАТКУ --- */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.content-container {
+  flex-grow: 1;
+  background-color: var(--color-bg);
+  padding: 30px; /* Збільшено відступи */
+  overflow-y: auto;
+}
+
+main {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* --- 1. СТОРІНКА АВТЕНТИФІКАЦІЇ --- */
+.auth-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e9ecef, #dee2e6); /* Градієнтний фон */
+}
+
+.auth-card {
+  background: var(--color-content-bg);
+  padding: 40px; /* Збільшено відступи */
+  border-radius: 10px; /* Більш заокруглені кути */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+}
+
+.auth-card h1 {
+  font-size: 26px;
+  margin-bottom: 30px;
+  color: #343a40;
+}
+
+.auth-toggle-btn {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 20px;
+  font-weight: 500;
+}
+.auth-toggle-btn:hover {
+    text-decoration: underline;
+}
+
+/* --- 2. БІЧНА ПАНЕЛЬ (SIDEBAR) --- */
+.sidebar {
+  width: 260px;
+  background: var(--color-sidebar-bg);
+  color: var(--color-text-inverted);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Тінь праворуч */
+}
+
+.sidebar-header {
+  padding: 20px 24px;
+  display: flex; /* Для вирівнювання логотипу */
+  align-items: center; /* Вирівнювання по вертикалі */
+  gap: 10px; /* Відступ між лого та текстом */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-logo {
+    width: 30px; /* Розмір лого */
+    height: 30px;
+}
+.sidebar-logo path {
+    fill: var(--color-primary); /* Зелений колір для частини лого */
+}
+
+.sidebar-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-text-inverted);
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 16px;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.sidebar-button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 16px; /* Змінено відступи */
+  background: none;
+  border: none;
+  border-radius: 6px;
+  color: #adb5bd; /* Світліший сірий для неактивних */
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s, color 0.2s;
+}
+
+.sidebar-button:hover {
+  background: rgba(255, 255, 255, 0.08); /* Трохи світліший фон при наведенні */
+  color: var(--color-text-inverted);
+}
+
+.sidebar-button.active {
+  background: var(--color-primary);
+  color: var(--color-text-inverted);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Тінь для активної кнопки */
+}
+.sidebar-button.active svg {
+    stroke: var(--color-text-inverted); /* Білий колір іконки */
+}
+.sidebar-button svg {
+  flex-shrink: 0;
+  stroke: #adb5bd; /* Сірий колір іконок */
+  transition: stroke 0.2s;
+}
+.sidebar-button:hover svg {
+    stroke: var(--color-text-inverted);
+}
+
+
+.sidebar-footer {
+  padding: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  margin-bottom: 8px; /* Додано відступ */
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-primary-dark); /* Темніший зелений для аватара */
+  color: var(--color-text-inverted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--color-text-inverted);
+}
+
+.user-role {
+  font-size: 12px;
+  color: #adb5bd;
+}
+
+.logout-btn {
+  width: 100%;
+  margin-top: 8px;
+  color: #adb5bd;
+}
+.logout-btn:hover {
+  background: var(--color-danger);
+  color: var(--color-text-inverted);
+}
+.logout-btn svg {
+    stroke: #adb5bd;
+}
+.logout-btn:hover svg {
+    stroke: var(--color-text-inverted);
+}
+
+
+/* --- 3. ЗАГОЛОВОК СТОРІНКИ --- */
+.page-header {
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 30px;
+}
+.page-header h2 {
+  margin: 0;
+  font-size: 30px; /* Збільшено шрифт */
+  color: #343a40;
+}
+.page-header p {
+  margin: 8px 0 0; /* Змінено відступ */
+  font-size: 16px;
+  color: var(--color-text-light);
+}
+
+.page-actions {
+  margin-bottom: 20px;
+  text-align: right;
+}
+
+/* --- 4. КАРТКИ (CARDS) --- */
+.card {
+  background: var(--color-content-bg);
+  border-radius: 8px; /* Збережено заокруглення */
+  border: 1px solid var(--color-border);
+  padding: 24px;
+  margin-bottom: 30px; /* Збільшено відступ */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Легка тінь */
+}
+.card h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 20px; /* Збільшено шрифт */
+  color: #495057; /* Трохи світліший колір заголовку картки */
+}
+
+/* --- 5. ФОРМИ (.styled-form) --- */
+.styled-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px; /* Збільшено відступ */
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #495057;
+}
+.form-group input,
+.form-group textarea,
+.form-group select {
+  padding: 12px 14px; /* Збільшено відступи */
+  font-size: 15px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  font-family: var(--font-family);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background-color: #f8f9fa; /* Світло-сірий фон полів */
+}
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light); /* Трохи більша тінь фокусу */
+  background-color: #fff;
+}
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+/* --- 6. ТАБЛИЦІ (.styled-table) --- */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--color-border); /* Рамка навколо таблиці */
+  border-radius: 8px;
+  margin-top: 10px;
+}
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.styled-table th,
+.styled-table td {
+  padding: 14px 18px; /* Збільшено відступи */
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: middle;
+}
+.styled-table th {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-light);
+  text-transform: uppercase;
+  background-color: #f8f9fa; /* Світліший фон заголовків */
+  border-top: 1px solid var(--color-border);
+}
+.styled-table td {
+  font-size: 14px;
+  color: #495057;
+}
+.styled-table tbody tr:last-child td {
+    border-bottom: none; /* Забрати нижню рамку в останнього рядка */
+}
+.styled-table tbody tr:hover {
+  background-color: #f1f3f5; /* Трохи темніший фон при наведенні */
+}
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+/* --- 7. КНОПКИ (.btn) --- */
+.btn {
+  padding: 10px 18px; /* Збільшено відступи */
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: inline-flex; /* Для вирівнювання іконок, якщо додати */
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverted);
+}
+.btn-primary:hover {
+  background-color: var(--color-primary-dark);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.btn-full {
+  width: 100%;
+}
+.btn-secondary {
+  background-color: #e9ecef; /* Світло-сірий */
+  color: #495057;
+  /* border: 1px solid #ced4da; */ /* Можна додати рамку */
+}
+.btn-secondary:hover {
+  background-color: #dee2e6;
+}
+.btn-danger {
+  background-color: var(--color-danger);
+  color: var(--color-text-inverted);
+}
+.btn-danger:hover {
+  background-color: #c82333;
+}
+.btn-success {
+  background-color: var(--color-success);
+  color: var(--color-text-inverted);
+}
+.btn-success:hover {
+  background-color: #218838;
+}
+.btn:disabled {
+    background-color: #ced4da;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+
+/* --- 8. МОДАЛЬНЕ ВІКНО (.modal) --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(33, 37, 41, 0.7); /* Темніший оверлей */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.modal-content {
+  background: var(--color-content-bg);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 650px; /* Трохи ширше */
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+.modal-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal-header h3 {
+  margin: 0;
+  font-size: 20px;
+  color: #343a40;
+}
+.modal-close-btn {
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: var(--color-text-light);
+  line-height: 1; /* Для кращого вирівнювання */
+}
+.modal-close-btn:hover {
+    color: var(--color-text);
+}
+.modal-body {
+  padding: 24px;
+  overflow-y: auto;
+}
+
+/* --- 9. СТАТУСИ (Badges) --- */
+.status-badge {
+  padding: 5px 12px; /* Збільшено відступи */
+  border-radius: 16px; /* Більш округлі */
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px; /* Додано розрідження */
+}
+/* Статуси товарів */
+.status-ok {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+.status-reorder {
+  background-color: #fff3cd; /* Світло-жовтий */
+  color: #856404; /* Темно-жовтий */
+}
+.status-critical {
+  background-color: #f8d7da; /* Світло-червоний */
+  color: #721c24; /* Темно-червоний */
+}
+.status-surplus {
+  background-color: #d1ecf1; /* Світло-синій */
+  color: #0c5460; /* Темно-синій */
+}
+
+/* Статуси Замовлень (Оновлено) */
+.status-pending { /* На затвердженні (Chief) */
+  background-color: #e2e3e5; /* Сірий */
+  color: #383d41;
+}
+.status-approved { /* Підтверджено Постачальником */
+  background-color: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+.status-rejected { /* Відхилено (будь-ким) */
+  background-color: #f8d7da; /* Світло-червоний */
+  color: #721c24; /* Темно-червоний */
+}
+/* .status-reorder (вище) використовується для 'pending_supplier_approval' */
+
+
+/* --- 10. СПОВІЩЕННЯ --- */
+.error-message {
+  color: #721c24;
+  background: #f8d7da;
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  border: 1px solid #f5c6cb;
+}
+.success-message {
+  color: #155724;
+  background: #d4edda;
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  border: 1px solid #c3e6cb;
+}
+
+/* --- 11. DASHBOARD --- */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Адаптивні колонки */
+    gap: 30px; /* Збільшено відступ */
+}
+.stat-card {
+    background: var(--color-content-bg);
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    padding: 24px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+.stat-card h3 {
+    margin: 0 0 8px;
+    font-size: 16px;
+    color: var(--color-text-light);
+    font-weight: 500;
+}
+.stat-card p {
+    margin: 0;
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--color-primary); /* Зелений для цифр */
+    line-height: 1.1;
+}
+.stat-card span {
+    font-size: 14px;
+    color: var(--color-text-light);
+    margin-top: 4px;
+    display: block;
+}
+.full-width {
+    grid-column: 1 / -1; /* Розтягнути на всю ширину */
+}
+
+/* --- 12. АДАПТИВНІСТЬ --- */
+/* (Залишаємо адаптивність без змін, але перевіряємо, чи добре виглядає з новими стилями) */
+@media (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    justify-content: space-between;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  .sidebar-menu {
+    display: flex;
+    flex-grow: 0;
+    padding: 8px;
+  }
+  .sidebar-button span {
+    display: none;
+  }
+  .sidebar-button {
+    padding: 10px;
+  }
+  .sidebar-footer {
+    display: none;
+  }
+  .sidebar-header {
+    border-bottom: none;
+    padding: 8px 16px;
+  }
+  .content-container {
+    padding: 16px;
+  }
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  .modal-content {
+    max-width: 95vw;
+  }
+  .page-header h2 {
+      font-size: 24px;
+  }
+}
+
